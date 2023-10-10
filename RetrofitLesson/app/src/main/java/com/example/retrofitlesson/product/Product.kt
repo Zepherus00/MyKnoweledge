@@ -1,4 +1,4 @@
-package com.example.retrofitlesson.retrofit
+package com.example.retrofitlesson.product
 
 data class Product(
     val id: Int,

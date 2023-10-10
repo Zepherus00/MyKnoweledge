@@ -33,6 +33,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -50,4 +53,6 @@ dependencies {
 
     implementation("com.squareup.okhttp3:logging-interceptor:4.7.2")
     implementation("com.squareup.okhttp3:okhttp:4.7.2")
+
+    implementation("com.squareup.picasso:picasso:2.8")
 }

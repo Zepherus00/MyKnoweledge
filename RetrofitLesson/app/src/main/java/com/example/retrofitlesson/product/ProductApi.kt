@@ -1,4 +1,4 @@
-package com.example.retrofitlesson.retrofit
+package com.example.retrofitlesson.product
 
 import retrofit2.http.GET
 import retrofit2.http.Path
