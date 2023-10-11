@@ -3,6 +3,7 @@ package com.example.retrofitlesson.search
 import com.example.retrofitlesson.list.Products
 import com.example.retrofitlesson.signin.AuthRequest
 import com.example.retrofitlesson.signin.User
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -21,5 +22,5 @@ interface SearchApi {
     ): Products
 
     @POST("auth/login")
-    suspend fun auth(@Body authRequest: AuthRequest): User
+    suspend fun auth(@Body authRequest: AuthRequest): Response<User>
 }
