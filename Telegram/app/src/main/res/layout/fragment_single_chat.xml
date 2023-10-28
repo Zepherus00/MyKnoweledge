@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragments.single_chat.SingleChatFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/toolbar_chat_image"
+            android:layout_width="@dimen/toolbar_image_width"
+            android:layout_height="@dimen/toolbar_image_height"
+            android:layout_marginStart="@dimen/vertical_large_margin"
+            android:src="@drawable/default_photo"
+            app:civ_circle_background_color="@color/accent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/toolbar_chat_full_name"
+            style="@style/normalText"
+            android:textColor="@color/accent"
+            app:layout_constraintStart_toEndOf="@id/toolbar_chat_image"
+            app:layout_constraintTop_toTopOf="@+id/toolbar_chat_image"
+            tools:text="Andrey Fomin" />
+
+        <TextView
+            android:id="@+id/toolbar_chat_status"
+            style="@style/smallText"
+            android:textColor="@color/colorAccentDark"
+            app:layout_constraintStart_toEndOf="@id/toolbar_chat_image"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_chat_full_name"
+            tools:text="В сети" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/chat_swipe_refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/chat_input_message"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/chat_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            tools:listitem="@layout/message_item" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <EditText
+        android:id="@+id/chat_input_message"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Сообщение"
+        android:padding="@dimen/appPadding"
+        android:textColor="@color/colorBlack"
+        android:textColorHint="@color/colorGrey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/chat_btn_send_message"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/chat_btn_send_message"
+        android:layout_width="50dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_send"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/chat_input_message" />
+
+    <ImageView
+        android:id="@+id/chat_btn_attach"
+        android:layout_width="50dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_attach"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/chat_input_message" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
