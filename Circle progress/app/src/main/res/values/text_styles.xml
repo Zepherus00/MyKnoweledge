@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <style name="SkillboxText" parent="TextAppearance.Material3.BodyMedium">
-        <item name="android:textSize">15sp</item>
-    </style>
-
-</resources>
