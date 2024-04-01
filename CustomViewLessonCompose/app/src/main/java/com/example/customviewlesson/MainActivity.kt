@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.customviewlesson.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(), TestView2.Listener {
+class MainActivity : AppCompatActivity(), TestView3.Listener {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

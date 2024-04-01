@@ -20,7 +20,7 @@ class TestView3(
     attributeSet: AttributeSet
 ) : View(context, attributeSet) {
     var listener: Listener? = null
-    private val paintCWidth = 100f
+    private val paintCWidth = 150f
     private val paint = Paint()
     private val paintCancelDr = Paint()
     private val paintText = Paint()
@@ -50,7 +50,7 @@ class TestView3(
             Bitmap.Config.ARGB_8888
         )
         val canvas = Canvas(cancelDrawable)
-        canvas.rotate(-90f, canvas.width / 2f, canvas.height / 2f)
+//        canvas.rotate(-90f, canvas.width / 2f, canvas.height / 2f)
         drawable?.setBounds(0, 0, 150, 150)
         drawable?.draw(canvas)
 
@@ -81,7 +81,7 @@ class TestView3(
         paintC.style = Paint.Style.STROKE
         for (i in images.indices) {
             paintC.color = if (i == buttonClicked)
-                Color.BLACK
+                mainColor2
             else mainColor
             canvas.drawArc(
                 centerX - radius,
@@ -99,7 +99,7 @@ class TestView3(
         canvas.drawCircle(
             centerX,
             centerY,
-            radius / 1.5f,
+            radius / 1.9f,
             paintC
         )
         canvas.drawBitmap(
@@ -127,14 +127,14 @@ class TestView3(
             paintText.getTextBounds(text, 0, text.length, rect)
             val angle = (360f / images.size) * index + ((360f / images.size) / 2f)
             val coordinate = getXY(angle)
-            canvas.rotate(-90f, coordinate.first, coordinate.second)
+//            canvas.rotate(-90f, coordinate.first, coordinate.second)
             canvas.drawText(
                 text,
                 coordinate.first - rect.exactCenterX(),
                 coordinate.second - rect.exactCenterY(),
                 paintText
             )
-            canvas.rotate(90f, coordinate.first, coordinate.second)
+//            canvas.rotate(90f, coordinate.first, coordinate.second)
         }
     }
 
