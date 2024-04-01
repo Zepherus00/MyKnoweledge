@@ -1,6 +1,7 @@
 package com.example.customviewlesson
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
@@ -9,34 +10,53 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import androidx.core.content.ContextCompat
 import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.sin
 
-class TestView2(
+class TestView3(
     context: Context,
     attributeSet: AttributeSet
 ) : View(context, attributeSet) {
     var listener: Listener? = null
     private val paintCWidth = 100f
     private val paint = Paint()
+    private val paintCancelDr = Paint()
     private val paintText = Paint()
     private val paintC = Paint()
     private val startAngle = 0f
-    private val colors = listOf(
-        Color.RED,
-        Color.BLUE,
-        Color.GREEN,
-        Color.CYAN,
-        Color.BLACK,
-        Color.GREEN,
-        Color.DKGRAY,
-        Color.YELLOW
+    private var mainColor = Color.BLUE
+    private var mainColor2 = Color.BLUE
+    private var cancelDrawable: Bitmap
+    private var images = listOf(
+        R.drawable.ic_a,
+        R.drawable.ic_b,
+        R.drawable.ic_c,
+        R.drawable.ic_d,
+        R.drawable.ic_e,
+        R.drawable.ic_f,
+        R.drawable.ic_g,
+        R.drawable.ic_h,
     )
-    private val sweepAngle = 360f / colors.size
+    private val sweepAngle = 360f / images.size
     private var buttonClicked = 0
 
     init {
+        val drawable = ContextCompat.getDrawable(context, R.drawable.ic_cancel)
+        cancelDrawable = Bitmap.createBitmap(
+            150,
+            150,
+            Bitmap.Config.ARGB_8888
+        )
+        val canvas = Canvas(cancelDrawable)
+        canvas.rotate(-90f, canvas.width / 2f, canvas.height / 2f)
+        drawable?.setBounds(0, 0, 150, 150)
+        drawable?.draw(canvas)
+
+        mainColor = ContextCompat.getColor(context, R.color.main)
+        mainColor2 = ContextCompat.getColor(context, R.color.main2)
+
         paintText.style = Paint.Style.FILL
         paintText.color = Color.WHITE
         paintText.textSize = 30f
@@ -59,10 +79,10 @@ class TestView2(
         val centerY = width / 2f
         val radius = (width.coerceAtMost(height) / 2f) - paintCWidth / 2f
         paintC.style = Paint.Style.STROKE
-        for (i in colors.indices) {
+        for (i in images.indices) {
             paintC.color = if (i == buttonClicked)
-                Color.GRAY
-            else colors[i]
+                Color.BLACK
+            else mainColor
             canvas.drawArc(
                 centerX - radius,
                 centerY - radius,
@@ -75,12 +95,17 @@ class TestView2(
             )
         }
         paintC.style = Paint.Style.FILL
-        paintC.color = Color.GRAY
+        paintC.color = mainColor2
         canvas.drawCircle(
             centerX,
             centerY,
-            radius / 1.7f,
+            radius / 1.5f,
             paintC
+        )
+        canvas.drawBitmap(
+            cancelDrawable, centerX - cancelDrawable.width / 2f,
+            centerY - cancelDrawable.height / 2f,
+            paintCancelDr
         )
         drawMenuText(canvas)
     }
@@ -100,7 +125,7 @@ class TestView2(
         TextUtils.menuList.forEachIndexed { index, text ->
             val rect = Rect()
             paintText.getTextBounds(text, 0, text.length, rect)
-            val angle = (360f / colors.size) * index + ((360f / colors.size) / 2f)
+            val angle = (360f / images.size) * index + ((360f / images.size) / 2f)
             val coordinate = getXY(angle)
             canvas.rotate(-90f, coordinate.first, coordinate.second)
             canvas.drawText(
@@ -139,7 +164,7 @@ class TestView2(
                         x - centerX
                     ).toDouble()
                 ) + 360) % 360
-                buttonClicked = (angle / (360 / colors.size)).toInt()
+                buttonClicked = (angle / (360 / images.size)).toInt()
                 listener?.onClick(buttonClicked)
                 Log.d("MyLog", "Angle: $angle")
                 invalidate()
