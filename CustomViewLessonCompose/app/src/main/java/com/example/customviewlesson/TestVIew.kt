@@ -7,7 +7,7 @@ import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
 
-class TestVIew(
+class TestView(
     context: Context,
     attributeSet: AttributeSet
 ) : View(context, attributeSet) {

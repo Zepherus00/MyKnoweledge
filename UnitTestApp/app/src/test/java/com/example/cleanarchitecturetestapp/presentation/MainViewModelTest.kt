@@ -45,7 +45,6 @@ class MainViewModelTest {
             override fun isMainThread(): Boolean {
                 return true
             }
-
         })
     }
 
